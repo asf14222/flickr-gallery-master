@@ -1,0 +1,54 @@
+
+.gallery-root {
+  text-align: center;
+}
+
+.gallery-header {
+  background-color: #222;
+  padding: 10px;
+  color: white;
+  font-size: 20pt;
+}
+
+.gallery-intro {
+  font-size: 15pt;
+}
+
+//I didn't yet able to make it work good on this project
+@media screen and (min-width: 1024px){
+  .image-root {
+      width: 12%;
+  }
+}
+
+@media screen and (max-width: 1024px){
+  .image-root {
+      width: 13%;
+  }
+}
+@media screen and (max-width: 800px){
+  .image-root {
+      width: 15%;
+  }
+}
+@media screen and (max-width: 736px){
+  .image-root {
+      width: 19%;
+  }
+}
+@media screen and (max-width: 640px){
+  .image-root {
+      width: 23%;
+  }
+}
+@media screen and (max-width: 600px){
+  .image-root {
+      width: 46%;
+  }
+}
+@media screen and (max-width: 414px){
+  .image-root {
+      width: 92%;
+  }
+}
+
