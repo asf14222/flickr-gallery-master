@@ -13,6 +13,7 @@ class Gallery extends React.Component {
     super(props);
     this.state = {
       images: [],
+      openImages: [],
       galleryWidth: this.getGalleryWidth()
     };
   }
@@ -25,6 +26,10 @@ class Gallery extends React.Component {
     }
   }
   getImages(tag) {
+    if(tag === 'welcome')
+    {
+
+    }else{
     const getImagesUrl = `services/rest/?method=flickr.photos.search&api_key=522c1f9009ca3609bcbaf08545f067ad&tags=${tag}&tag_mode=any&per_page=100&format=json&nojsoncallback=1`;
     const baseUrl = 'https://api.flickr.com/';
     axios({
@@ -41,10 +46,12 @@ class Gallery extends React.Component {
           res.photos.photo.length > 0
         ) {
           this.setState({images: res.photos.photo});
-          
+
         }
       });
+    }
   }
+  
   componentDidMount() {
     this.getImages(this.props.tag);
     this.setState({

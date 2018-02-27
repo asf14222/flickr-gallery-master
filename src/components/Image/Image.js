@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import FontAwesome from 'react-fontawesome';
+import Lightbox from 'react-image-lightbox';
 import './Image.scss';
 
 class Image extends React.Component {
@@ -14,7 +15,8 @@ class Image extends React.Component {
     this.calcImageSize = this.calcImageSize.bind(this);
     this.state = {
       size: 200,
-      degree: 0
+      degree: 0,
+      isOpen: false
     };
   }
 
@@ -54,16 +56,18 @@ class Image extends React.Component {
           }
         }
       });
+      console.log( this.props.images);
       this.setState({degree: degree});
 
   }
 
+ 
   handleClickExpand(){
 
   }
-  
 
   render() {
+    const { photoIndex, isOpen } = this.state;
     return (
       <div
         className="image-root"
@@ -77,7 +81,15 @@ class Image extends React.Component {
         <div style={{transform: `rotate(${-this.state.degree}deg)`}}>
           <FontAwesome className="image-icon" name="sync-alt" title="rotate" onClick={this.handleClickRotate.bind(this)}/>
           <FontAwesome className="image-icon" name="trash-alt" title="delete" onClick={this.handleClickDelete.bind(this)}/>
-          <FontAwesome className="image-icon" name="expand" title="expand" onClick={this.handleClickExpand.bind(this)}/>
+          <FontAwesome className="image-icon" name="expand" title="expand" data-lightbox="gallery" onClick={() => this.setState({ isOpen: true })}/>
+          {isOpen && (
+          <Lightbox
+            mainSrc={`${this.urlFromDto(this.props.dto)}`}
+            nextSrc={this.props.images[(photoIndex + 1) % this.props.images.length]}
+            prevSrc={this.props.images[(photoIndex + this.props.images.length - 1) % this.props.images.length]}
+            onCloseRequest={() => this.setState({ isOpen: false })}
+          />
+        )}
         </div>
       </div>
     );
